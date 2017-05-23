@@ -1,0 +1,18 @@
+<% if @page.parent_id %>
+    <p><%= link_to 'На уровень выше', controller: 'pages', action: 'show', name: @page.parent.name %></p>
+<% else %>
+    <p><%= link_to 'На уровень выше', controller: 'pages', action: 'index' %></p>
+<% end %>
+
+<h1><%= @page.title %></h1>
+<p><%= @page.content_raw.html_safe %></p>
+
+<% (@tree.keys).each do |key| %>
+  <%= render :partial => "sub_list", :locals => {:tree => @tree[key] }%>
+<% end %>
+
+<p>
+  <%= link_to 'Добавить', controller: 'pages', action: 'new', name: @page.name %> |
+  <%= link_to 'Удалить (включая вложенные)', controller: 'pages', action: 'destroy', name: @page.name %> |
+  <%= link_to 'Редактировать', controller: 'pages', action: 'edit', name: @page.name %>
+</p>

@@ -1,0 +1,8 @@
+<% if tree.keys.size > 0 %>
+    <ul>
+      <% (tree.keys).each do |key| %>
+          <li><%= link_to key.title, key.name  %></li>
+          <%= render :partial => "sub_list", :locals => {:tree => tree[key] }%>
+      <% end %>
+    </ul>
+<% end %>

@@ -1,0 +1,33 @@
+<%= form_for @page, url: {controller: 'pages', action: @page.new_record? ? "create" : "update"} do |f| %>
+
+    <% if @page.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@page.errors.count, "error") %> prohibited this wiki_post from being saved:</h2>
+
+          <ul>
+            <% @page.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <% if @page.new_record? %>
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+    <% else %>
+        <%= f.hidden_field :id, value: @page.id %>
+    <% end %>
+
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :content %><br>
+      <%= f.text_area :content %>
+    </p>
+    <p>
+      <%= f.submit @page.new_record? ? "Создать" : "Обновить" %>
+    </p>
+<% end %>
